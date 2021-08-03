@@ -45,7 +45,7 @@ test('that undefined input is not accepted', () => {
     expect(balance).toBe(expected)
 })
 
-test('that user can\'t go into overdraft', () => {
+test('that user cannot go into overdraft', () => {
     const account = new Account()
     let expected = 0
 
@@ -76,4 +76,34 @@ test('cannot withdraw with an invalid input', () => {
     let balance = account.Balance
 
     expect(balance).toBe(expected)
+})
+
+test('account can store a deposit', () => {
+    //if any deposits/withdrawals performed I want them stored
+    //in a variable
+    const account = new Account()
+    let expected = [{"amount": 500, "balance": 500}]
+
+    account.deposit(500)
+    let balance = account.Balance
+    let history = account.History
+
+    expect(history).toEqual(expected)
+})
+
+test('account can store a deposit as a negative number', () => {
+    //if any deposits/withdrawals performed I want them stored
+    //in a variable
+    const account = new Account()
+    let expected = [
+        {"amount": 1000, "balance": 1000},
+        {"amount": -500, "balance": 500}
+    ]
+
+    account.deposit(1000)
+    account.withdraw(500)
+    let balance = account.Balance
+    let history = account.History
+
+    expect(history).toEqual(expected)
 })
