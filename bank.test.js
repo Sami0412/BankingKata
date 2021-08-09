@@ -91,7 +91,7 @@ test('account can store a deposit', () => {
     expect(history).toEqual(expected)
 })
 
-test('account can store a deposit as a negative number', () => {
+test('account can store a withdrawal as a negative number', () => {
     //if any deposits/withdrawals performed I want them stored
     //in a variable
     const account = new Account()
@@ -102,8 +102,21 @@ test('account can store a deposit as a negative number', () => {
 
     account.deposit(1000)
     account.withdraw(500)
-    let balance = account.Balance
     let history = account.History
 
     expect(history).toEqual(expected)
+})
+
+test('user can print a statement of previous transactions', () => {
+    const account = new Account()
+    let expected =
+    "Date || Amount || Balance\n10/01/2021 || 1000 || 1000\n13/01/2021 || 2000 || 3000\n14/01/2021 || -500 || 2500\n"
+
+    account.deposit(1000, "10/01/2021")
+    account.deposit(2000, "13/01/2021")
+    account.withdraw(500, "14/01/2021")
+    //let history = account.History
+    let statement = account.statement()
+
+    expect(statement).toEqual(expected)
 })
