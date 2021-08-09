@@ -22,7 +22,6 @@ class Account {
 
     statement() {
         let history = this.History
-        "Date || Amount || Balance\n"
         let statement = "Date || Amount || Balance\n"
         history.forEach(transaction => 
             statement += transaction.date + " || " + transaction.amount + " || " + transaction.balance + "\n") 
